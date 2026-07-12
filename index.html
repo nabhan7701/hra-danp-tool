@@ -1,7 +1,64 @@
 <!DOCTYPE html>
-<html>
-<body>
-  <h1>My Process Safety Research Tool</h1>
-  <p>Step 1 is complete!</p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DELPHI Portal - Process Safety</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans p-6">
+
+  <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+    
+    <h1 class="text-3xl font-bold text-blue-900 mb-2">DELPHI Expert Consensus Portal</h1>
+    <p class="text-slate-600 mb-8">
+      Please rate the severity of the following human error factors in high-hazard installations. 
+      Scale: 1 (Very Low Influence) to 5 (Very High Influence).
+    </p>
+
+    <form class="space-y-6">
+      
+      <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+        <label class="block font-semibold mb-3">1. Inadequate Training on CIMAH 1996 Regulations</label>
+        <div class="flex space-x-6">
+          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
+        </div>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+        <label class="block font-semibold mb-3">2. Lack of OSHA Compliance and Safety Culture</label>
+        <div class="flex space-x-6">
+          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
+        </div>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+        <label class="block font-semibold mb-3">3. Cognitive Overload during Emergency Shutdowns</label>
+        <div class="flex space-x-6">
+          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
+          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
+        </div>
+      </div>
+
+      <div class="pt-4">
+        <button type="button" class="bg-blue-600 text-white font-bold py-3 px-6 rounded hover:bg-blue-700 transition">
+          Submit Expert Ratings
+        </button>
+      </div>
+
+    </form>
+  </div>
+
 </body>
 </html>
