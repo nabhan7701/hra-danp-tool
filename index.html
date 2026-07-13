@@ -44,7 +44,7 @@
     <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
       <div class="max-w-7xl mx-auto space-y-8">
         
-        <h1 class="text-3xl font-bold text-blue-900">HRA Construct Mass Survey Dashboard</h1>
+        <h1 class="text-3xl font-bold text-blue-900">Mass Survey Result Dashboard</h1>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4">
@@ -64,7 +64,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
             <h2 class="text-lg font-bold text-slate-800 mb-4">Demographic Distribution</h2>
-            <div class="grid grid-cols-3 gap-4 h-64 pb-6">
+            <div class="grid grid-cols-3 gap-4 h-72 pb-8">
               <div class="relative h-full w-full"><canvas id="chartExp"></canvas></div>
               <div class="relative h-full w-full"><canvas id="chartPos"></canvas></div>
               <div class="relative h-full w-full"><canvas id="chartInd"></canvas></div>
@@ -72,7 +72,7 @@
           </div>
           <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
             <h2 class="text-lg font-bold text-slate-800 mb-4">Cluster Consensus</h2>
-            <div class="relative h-64 w-full pb-6"><canvas id="chartRadar"></canvas></div>
+            <div class="relative h-72 w-full pb-8"><canvas id="chartRadar"></canvas></div>
           </div>
         </div>
 
@@ -102,7 +102,7 @@
     document.getElementById('menu-btn').addEventListener('click', () => sidebar.classList.toggle('-ml-64'));
     Chart.defaults.font.family = 'Inter, sans-serif'; Chart.defaults.color = '#64748b';
     
-    // Doughnut Charts
+    // Doughnut Charts - UPDATED with layout padding to shrink the circles
     const createDoughnut = (id, labels, data, colors, title) => { 
       new Chart(document.getElementById(id), { 
         type: 'doughnut', 
@@ -110,6 +110,9 @@
         options: { 
           responsive: true, 
           maintainAspectRatio: false, 
+          layout: {
+            padding: { bottom: 25 } // This shrinks the circle and adds a cushion at the bottom
+          },
           plugins: { 
             legend: { position: 'bottom', labels: { boxWidth: 10, font: {size: 11} } }, 
             title: { display: true, text: title, font: {size: 14} } 
@@ -123,14 +126,20 @@
     createDoughnut('chartPos', ['Managerial', 'Non-Managerial'], [76, 24], ['#f59e0b', '#fef3c7'], 'Position');
     createDoughnut('chartInd', ['Petrochem', 'Chem', 'Construction', 'Other'], [60, 15, 10, 15], ['#10b981', '#6ee7b7', '#d1fae5', '#a7f3d0'], 'Industry');
     
-    // Radar Chart
+    // Radar Chart - UPDATED with layout padding
     new Chart(document.getElementById('chartRadar'), { 
       type: 'radar', 
       data: { 
         labels: ['L-S', 'L-H', 'L-E', 'L-L'], 
         datasets: [{ label: 'Aggregate Consensus %', data: [82, 78, 85, 88], backgroundColor: 'rgba(59, 130, 246, 0.2)', borderColor: '#3b82f6', pointBackgroundColor: '#1d4ed8' }] 
       }, 
-      options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 50, max: 100, ticks: { stepSize: 10 } } }, plugins: { legend: { display: false } } } 
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        layout: { padding: { bottom: 20 } },
+        scales: { r: { min: 50, max: 100, ticks: { stepSize: 10 } } }, 
+        plugins: { legend: { display: false } } 
+      } 
     });
     
     // Bar Charts
