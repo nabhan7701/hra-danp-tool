@@ -12,7 +12,6 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans flex h-screen overflow-hidden">
 
-  <!-- Sidebar -->
   <aside id="sidebar" class="w-64 bg-slate-900 text-slate-300 flex flex-col transition-all duration-300">
     <div class="h-16 flex items-center justify-center border-b border-slate-700 bg-slate-950">
       <h2 class="text-white font-bold text-xl tracking-wide">Menu</h2>
@@ -28,35 +27,26 @@
     </nav>
   </aside>
 
-  <!-- Main Content Area -->
   <div class="flex-1 flex flex-col h-screen">
     <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10 border-b border-slate-200">
       <button id="menu-btn" class="text-slate-500 hover:text-slate-800 p-2 rounded focus:outline-none focus:ring-2 focus:ring-slate-300">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
-      <div class="flex items-center space-x-4">
-        <div class="w-9 h-9 bg-slate-100 rounded-full flex items-center justify-center border border-slate-300 shadow-sm">
-          <span class="text-sm font-bold text-slate-600">NR</span>
-        </div>
-      </div>
     </header>
 
     <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
       <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-slate-200">
         
-        <div class="mb-8 flex space-x-6 border-b border-slate-200 pb-4 text-sm md:text-base overflow-x-auto whitespace-nowrap">
-            <span class="text-blue-700 font-bold border-b-2 border-blue-700 pb-4 -mb-4">1. DELPHI Portal</span>
-            <a href="/ahp" class="text-slate-400 hover:text-blue-600 font-medium transition">2. AHP Pairwise Comparison</a>
-            <a href="/dematel" class="text-slate-400 hover:text-blue-600 font-medium transition">3. DEMATEL Matrix</a>
-            <a href="/dashboard" class="text-slate-400 hover:text-blue-600 font-medium transition">4. Final Results</a>
+        <h1 class="text-3xl font-bold text-blue-900 mb-2">DELPHI Expert Consensus Portal</h1>
+        
+        <div id="success-message" class="hidden p-8 text-center">
+            <div class="text-6xl mb-4">✅</div>
+            <h2 class="text-2xl font-bold text-slate-800">Submission Received!</h2>
+            <p class="text-slate-600 mt-2">Thank you for your expert insights. Your data has been recorded successfully.</p>
+            <a href="/ahp" class="mt-6 inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded hover:bg-blue-700 transition">Proceed to Phase 2</a>
         </div>
 
-        <h1 class="text-3xl font-bold text-blue-900 mb-2">DELPHI Expert Consensus Portal</h1>
-        <p class="text-slate-600 mb-8">Please provide your details below and rate the factors.</p>
-
-        <!-- Backend Form -->
-        <form action="https://script.google.com/macros/s/AKfycbzw4QmTInYtZYxrxHTMGKwCNaaQ7NHY_fhwg8sP5aN6_lJoIxhtpcnK6_08PnAuDHqs/exec" method="POST" class="space-y-10">
-          
+        <form id="delphi-form" class="space-y-10">
           <div class="p-6 bg-blue-50 rounded-lg border border-blue-100 shadow-inner">
             <label class="block font-bold text-blue-900 mb-2 uppercase text-xs tracking-wider">Expert Information</label>
             <input type="text" name="Expert_Name" required placeholder="Enter your Full Name" class="w-full p-3 border border-blue-200 rounded focus:ring-2 focus:ring-blue-500">
@@ -65,12 +55,11 @@
           <div id="survey-container" class="space-y-10"></div>
 
           <div class="pt-6 border-t border-slate-200">
-            <button type="submit" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded hover:bg-blue-700 transition shadow-md">
+            <button type="submit" id="submit-btn" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded hover:bg-blue-700 transition shadow-md">
               Submit Expert Ratings
             </button>
           </div>
         </form>
-
       </div>
     </main>
   </div>
@@ -79,42 +68,34 @@
     const sidebar = document.getElementById('sidebar');
     document.getElementById('menu-btn').addEventListener('click', () => sidebar.classList.toggle('-ml-64'));
 
-    // Data with "key" mapped to your Sheet headers
-    const delphiData = [
-      { cluster: "Liveware-Software (L-S)", factors: [ 
-        { name: "Procedure Familiarity", key: "Procedure_Familiarity", desc: "How well you know a specific written procedure." }, 
-        { name: "Mental Workload", key: "Mental_Workload", desc: "How much thinking the written rules require." }, 
-        { name: "Willingness to Comply", key: "Willingness_to_Comply", desc: "Your personal choice to follow written company policies." }, 
-        { name: "Training Quality", key: "Training_Quality", desc: "Whether the training actually taught the system rules well." }, 
-        { name: "Law Compliance", key: "Law_Compliance", desc: "Following official written government safety laws." }, 
-        { name: "Procedure Clarity", key: "Procedure_Clarity", desc: "How easy it is to read and understand instructions." } 
-      ]},
-      { cluster: "Liveware-Hardware (L-H)", factors: [ 
-        { name: "Physical Slip-Ups", key: "Physical_Slip_Ups", desc: "Accidentally pressing or touching the wrong machine part." }, 
-        { name: "Sensor Tricking", key: "Sensor_Tricking", desc: "Using your body to bypass physical security sensors." }, 
-        { name: "Over-Trusting Machines", key: "Over_Trusting_Machines", desc: "Trusting automatic controls too much during physical work." }, 
-        { name: "Machine Controls", key: "Machine_Controls", desc: "How easily you can physically press and read buttons." }, 
-        { name: "Alarm Visibility", key: "Alarm_Visibility", desc: "How easily you can see or hear a physical alarm." }, 
-        { name: "Tool Availability", key: "Tool_Availability", desc: "Actually having the right physical tools in your hands." } 
-      ]},
-      { cluster: "Liveware-Environment (L-E)", factors: [ 
-        { name: "Physical Exhaustion", key: "Physical_Exhaustion", desc: "Being completely tired out by the harsh environment." }, 
-        { name: "Alertness Drop", key: "Alertness_Drop", desc: "Losing focus because the environment makes you tired." }, 
-        { name: "Chronic Burnout", key: "Chronic_Burnout", desc: "Long-term exhaustion from enduring harsh environmental shift demands." }, 
-        { name: "Extreme Heat", key: "Extreme_Heat", desc: "High temperatures that quickly drain your physical energy." }, 
-        { name: "Loud Noises", key: "Loud_Noises", desc: "Loud workplace sounds that make it hard to focus." }, 
-        { name: "Shift Schedule", key: "Shift_Schedule", desc: "How your work hours and break times are planned." } 
-      ]},
-      { cluster: "Liveware-Liveware (L-L)", factors: [ 
-        { name: "Safety Over Production", key: "Safety_Over_Production", desc: "Choosing safety first because the company demands it." }, 
-        { name: "Team Safety Help", key: "Team_Safety_Help", desc: "Volunteering to fix safety issues alongside your coworkers." }, 
-        { name: "Shared Alertness", key: "Shared_Alertness", desc: "The whole team staying watchful because of company culture." }, 
-        { name: "Company Safety Culture", key: "Company_Safety_Culture", desc: "How much the whole organization truly prioritizes safety." }, 
-        { name: "Shift Handover Talk", key: "Shift_Handover_Talk", desc: "Clearly explaining plant status to the next worker shift." }, 
-        { name: "Expert Team Help", key: "Expert_Team_Help", desc: "Getting help from specialized engineers or maintenance coworkers." } 
-      ]}
-    ];
+    // --- FORM SUBMISSION LOGIC (AJAX) ---
+    const form = document.getElementById('delphi-form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Stop the page from navigating
+      const btn = document.getElementById('submit-btn');
+      btn.innerText = "Submitting...";
+      btn.disabled = true;
 
+      const formData = new FormData(form);
+      
+      fetch("https://script.google.com/macros/s/AKfycbzw4QmTInYtZYxrxHTMGKwCNaaQ7NHY_fhwg8sP5aN6_lJoIxhtpcnK6_08PnAuDHqs/exec", {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        form.classList.add('hidden'); // Hide the form
+        document.getElementById('success-message').classList.remove('hidden'); // Show success
+      })
+      .catch(error => alert("There was an error submitting your data. Please try again."));
+    });
+
+    // ... (rest of your delphiData and html generation code remains exactly the same)
+    const delphiData = [
+      { cluster: "Liveware-Software (L-S)", factors: [ { name: "Procedure Familiarity", key: "Procedure_Familiarity", desc: "How well you know a specific written procedure." }, { name: "Mental Workload", key: "Mental_Workload", desc: "How much thinking the written rules require." }, { name: "Willingness to Comply", key: "Willingness_to_Comply", desc: "Your personal choice to follow written company policies." }, { name: "Training Quality", key: "Training_Quality", desc: "Whether the training actually taught the system rules well." }, { name: "Law Compliance", key: "Law_Compliance", desc: "Following official written government safety laws." }, { name: "Procedure Clarity", key: "Procedure_Clarity", desc: "How easy it is to read and understand instructions." } ] },
+      { cluster: "Liveware-Hardware (L-H)", factors: [ { name: "Physical Slip-Ups", key: "Physical_Slip_Ups", desc: "Accidentally pressing or touching the wrong machine part." }, { name: "Sensor Tricking", key: "Sensor_Tricking", desc: "Using your body to bypass physical security sensors." }, { name: "Over-Trusting Machines", key: "Over_Trusting_Machines", desc: "Trusting automatic controls too much during physical work." }, { name: "Machine Controls", key: "Machine_Controls", desc: "How easily you can physically press and read buttons." }, { name: "Alarm Visibility", key: "Alarm_Visibility", desc: "How easily you can see or hear a physical alarm." }, { name: "Tool Availability", key: "Tool_Availability", desc: "Actually having the right physical tools in your hands." } ] },
+      { cluster: "Liveware-Environment (L-E)", factors: [ { name: "Physical Exhaustion", key: "Physical_Exhaustion", desc: "Being completely tired out by the harsh environment." }, { name: "Alertness Drop", key: "Alertness_Drop", desc: "Losing focus because the environment makes you tired." }, { name: "Chronic Burnout", key: "Chronic_Burnout", desc: "Long-term exhaustion from enduring harsh environmental shift demands." }, { name: "Extreme Heat", key: "Extreme_Heat", desc: "High temperatures that quickly drain your physical energy." }, { name: "Loud Noises", key: "Loud_Noises", desc: "Loud workplace sounds that make it hard to focus." }, { name: "Shift Schedule", key: "Shift_Schedule", desc: "How your work hours and break times are planned." } ] },
+      { cluster: "Liveware-Liveware (L-L)", factors: [ { name: "Safety Over Production", key: "Safety_Over_Production", desc: "Choosing safety first because the company demands it." }, { name: "Team Safety Help", key: "Team_Safety_Help", desc: "Volunteering to fix safety issues alongside your coworkers." }, { name: "Shared Alertness", key: "Shared_Alertness", desc: "The whole team staying watchful because of company culture." }, { name: "Company Safety Culture", key: "Company_Safety_Culture", desc: "How much the whole organization truly prioritizes safety." }, { name: "Shift Handover Talk", key: "Shift_Handover_Talk", desc: "Clearly explaining plant status to the next worker shift." }, { name: "Expert Team Help", key: "Expert_Team_Help", desc: "Getting help from specialized engineers or maintenance coworkers." } ] }
+    ];
     const container = document.getElementById('survey-container');
     let htmlContent = '';
     delphiData.forEach((section) => {
@@ -124,13 +105,10 @@
             <div class="p-4 bg-white rounded-lg border border-slate-200 shadow-sm hover:border-blue-300 transition">
               <div class="has-tooltip relative inline-block mb-4 cursor-help">
                 <span class="block font-semibold text-slate-700 border-b border-dashed border-slate-400 hover:text-blue-700 transition pb-0.5">${factor.name}</span>
-                <div class="tooltip absolute z-50 bottom-full left-0 mb-2 w-72 p-4 bg-slate-900 text-white rounded-lg shadow-xl text-sm text-left">
-                  <div class="font-bold border-b border-slate-700 pb-1 mb-2 text-blue-300">${factor.name}</div>
-                  <div class="text-slate-300 italic">${factor.desc}</div>
-                </div>
+                <div class="tooltip absolute z-50 bottom-full left-0 mb-2 w-72 p-4 bg-slate-900 text-white rounded-lg shadow-xl text-sm text-left"><div class="font-bold border-b border-slate-700 pb-1 mb-2 text-blue-300">${factor.name}</div><div class="text-slate-300 italic">${factor.desc}</div></div>
               </div>
               <div class="flex space-x-4 sm:space-x-8">
-                ${[1,2,3,4,5].map(val => `<label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${factor.key}" value="${val}" required class="w-5 h-5 text-blue-600"><span class="group-hover:text-blue-600 font-medium">${val}</span></label>`).join('')}
+                ${[1,2,3,4,5].map(val => `<label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${factor.key}" value="${val}" required class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">${val}</span></label>`).join('')}
               </div>
             </div>`;
       });
