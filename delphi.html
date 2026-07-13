@@ -6,59 +6,115 @@
   <title>DELPHI Portal - Process Safety</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans p-6">
+<body class="bg-slate-50 text-slate-800 font-sans flex h-screen overflow-hidden">
 
-  <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+  <aside id="sidebar" class="w-64 bg-slate-900 text-slate-300 flex flex-col transition-all duration-300">
+    <div class="h-16 flex items-center justify-center border-b border-slate-700 bg-slate-950">
+      <h2 class="text-white font-bold text-xl tracking-wide">Menu</h2>
+    </div>
     
-    <h1 class="text-3xl font-bold text-blue-900 mb-2">DELPHI Expert Consensus Portal</h1>
-    <p class="text-slate-600 mb-8">
-      Please rate the severity of the following human error factors in high-hazard installations. 
-      Scale: 1 (Very Low Influence) to 5 (Very High Influence).
-    </p>
+    <nav class="flex-1 overflow-y-auto mt-4">
+      <ul class="space-y-1">
+        <li>
+          <a href="/" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">Home Dashboard</a>
+        </li>
+        <li>
+          <a href="/delphi" class="block px-6 py-4 bg-slate-800 text-white border-l-4 border-blue-500 font-medium">1. DELPHI Portal</a>
+        </li>
+        <li>
+          <a href="/ahp" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">2. AHP Matrix</a>
+        </li>
+        <li>
+          <a href="/dematel" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">3. DEMATEL Matrix</a>
+        </li>
+        <li>
+          <a href="/dashboard" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">4. Final Results</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
 
-    <form class="space-y-6">
-      
-      <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
-        <label class="block font-semibold mb-3">1. Inadequate Training on CIMAH 1996 Regulations</label>
-        <div class="flex space-x-6">
-          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f1" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
+  <div class="flex-1 flex flex-col h-screen">
+    
+    <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10 border-b border-slate-200">
+      <button id="menu-btn" class="text-slate-500 hover:text-slate-800 p-2 rounded focus:outline-none focus:ring-2 focus:ring-slate-300">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+      <div class="flex items-center space-x-4">
+        <div class="w-9 h-9 bg-slate-100 rounded-full flex items-center justify-center border border-slate-300 shadow-sm">
+          <span class="text-sm font-bold text-slate-600">NR</span>
         </div>
       </div>
+    </header>
 
-      <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
-        <label class="block font-semibold mb-3">2. Lack of OSHA Compliance and Safety Culture</label>
-        <div class="flex space-x-6">
-          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f2" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
+    <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
+      <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+        
+        <div class="mb-8 flex space-x-6 border-b border-slate-200 pb-4 text-sm md:text-base overflow-x-auto whitespace-nowrap">
+            <span class="text-blue-700 font-bold border-b-2 border-blue-700 pb-4 -mb-4">1. DELPHI Portal</span>
+            <a href="/ahp" class="text-slate-400 hover:text-blue-600 font-medium transition">2. AHP Pairwise Comparison</a>
+            <a href="/dematel" class="text-slate-400 hover:text-blue-600 font-medium transition">3. DEMATEL Matrix</a>
+            <a href="/dashboard" class="text-slate-400 hover:text-blue-600 font-medium transition">4. Final Results</a>
         </div>
+
+        <h1 class="text-3xl font-bold text-blue-900 mb-2">DELPHI Expert Consensus Portal</h1>
+        <p class="text-slate-600 mb-8">
+          Please rate the severity of the following human error factors in high-hazard installations. 
+          Scale: 1 (Very Low Influence) to 5 (Very High Influence).
+        </p>
+
+        <form class="space-y-6">
+          
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <label class="block font-semibold mb-3">1. Inadequate Training on CIMAH 1996 Regulations</label>
+            <div class="flex space-x-6">
+              <label class="flex items-center space-x-2"><input type="radio" name="f1" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f1" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f1" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f1" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f1" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <label class="block font-semibold mb-3">2. Lack of OSHA Compliance and Safety Culture</label>
+            <div class="flex space-x-6">
+              <label class="flex items-center space-x-2"><input type="radio" name="f2" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f2" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f2" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f2" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f2" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <label class="block font-semibold mb-3">3. Cognitive Overload during Emergency Shutdowns</label>
+            <div class="flex space-x-6">
+              <label class="flex items-center space-x-2"><input type="radio" name="f3" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f3" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f3" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f3" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
+              <label class="flex items-center space-x-2"><input type="radio" name="f3" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <a href="/ahp" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded hover:bg-blue-700 transition text-center w-full sm:w-auto">
+              Submit Expert Ratings & Proceed to Phase 2
+            </a>
+          </div>
+
+        </form>
       </div>
+    </main>
+  </div>
 
-      <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
-        <label class="block font-semibold mb-3">3. Cognitive Overload during Emergency Shutdowns</label>
-        <div class="flex space-x-6">
-          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="1" class="w-5 h-5 text-blue-600"> <span>1</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="2" class="w-5 h-5 text-blue-600"> <span>2</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="3" class="w-5 h-5 text-blue-600"> <span>3</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="4" class="w-5 h-5 text-blue-600"> <span>4</span></label>
-          <label class="flex items-center space-x-2"><input type="radio" name="f3" value="5" class="w-5 h-5 text-blue-600"> <span>5</span></label>
-        </div>
-      </div>
-
-    <div class="pt-4">
-        <a href="/ahp" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded hover:bg-blue-700 transition text-center w-full sm:w-auto">
-          Submit Expert Ratings & Proceed to Phase 2
-        </a>
-      </div>
-
-    </form>
-  </div> 
-
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const menuBtn = document.getElementById('menu-btn');
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('-ml-64');
+    });
+  </script>
 </body>
 </html>
