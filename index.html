@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process Safety Research Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex h-screen overflow-hidden">
+
+  <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col">
+    <div class="h-16 flex items-center justify-center border-b border-slate-700 bg-slate-950">
+      <h2 class="text-white font-bold text-xl tracking-wide">Menu</h2>
+    </div>
+    
+    <nav class="flex-1 overflow-y-auto mt-4">
+      <ul class="space-y-1">
+        <li>
+          <a href="/" class="block px-6 py-4 bg-slate-800 text-white border-l-4 border-blue-500 font-medium">Home Dashboard</a>
+        </li>
+        <li>
+          <a href="/delphi" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">1. DELPHI Portal</a>
+        </li>
+        <li>
+          <a href="/ahp" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">2. AHP Matrix</a>
+        </li>
+        <li>
+          <a href="/dematel" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">3. DEMATEL Matrix</a>
+        </li>
+        <li>
+          <a href="/dashboard" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">4. Final Results</a>
+        </li>
+        <li class="mt-8 border-t border-slate-700 pt-4">
+          <a href="#" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition text-sm">About the Researcher</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="flex-1 flex flex-col h-screen">
+    
+    <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10 border-b border-slate-200">
+      <button class="text-slate-500 hover:text-slate-800">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+      
+      <div class="flex items-center space-x-4">
+        <div class="w-9 h-9 bg-slate-100 rounded-full flex items-center justify-center border border-slate-300 shadow-sm">
+          <span class="text-sm font-bold text-slate-600">NR</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
+      <div class="max-w-5xl mx-auto bg-white p-10 rounded-xl shadow-md border border-slate-200">
+        <h1 class="text-4xl font-bold text-slate-800 mb-6">Process Safety Research Hub</h1>
+        <p class="text-slate-600 text-lg leading-relaxed">
+          Welcome to the main dashboard. This portal digitalizes the DEMATEL-based Analytic Network Process (DANP) framework to systematically analyze human error in high-hazard installations.
+        </p>
+        <p class="text-slate-600 mt-6 font-medium bg-blue-50 p-4 rounded-lg border border-blue-100 inline-block">
+          Select a tool from the menu on the left to begin data collection.
+        </p>
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
