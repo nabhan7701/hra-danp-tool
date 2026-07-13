@@ -55,28 +55,26 @@
           Please provide your details below, followed by your ratings for our 24 identified human error factors.
         </p>
 
-        <form class="space-y-10">
-          
-          <div class="p-6 bg-blue-50 rounded-lg border border-blue-100 shadow-inner">
-            <label class="block font-bold text-blue-900 mb-2 uppercase text-xs tracking-wider">Expert Information</label>
-            <input type="text" placeholder="Enter your Full Name or Expert ID" class="w-full p-3 border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
-          </div>
+        <form action="https://script.google.com/macros/s/AKfycbzw4QmTInYtZYxrxHTMGKwCNaaQ7NHY_fhwg8sP5aN6_lJoIxhtpcnK6_08PnAuDHqs/exec" method="POST" class="space-y-10">
+    <div class="p-6 bg-blue-50 rounded-lg border border-blue-100 shadow-inner">
+        <label class="block font-bold text-blue-900 mb-2 uppercase text-xs tracking-wider">Expert Information</label>
+        <input type="text" name="Expert_Name" placeholder="Enter your Full Name" class="w-full p-3 border border-blue-200 rounded">
+    </div>
 
-          <div id="survey-container" class="space-y-10">
-            </div>
+    <div id="survey-container" class="space-y-10"></div>
 
-          <div class="pt-6 border-t border-slate-200">
-            <a href="/ahp" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded hover:bg-blue-700 transition shadow-md text-center w-full sm:w-auto">
-              Submit Expert Ratings & Proceed to Phase 2
-            </a>
-          </div>
-        </form>
+    <div class="pt-6 border-t border-slate-200">
+        <button type="submit" class="w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded hover:bg-blue-700 transition">
+            Submit Expert Ratings
+        </button>
+    </div>
+</form>
 
-      </div>
-    </main>
-  </div>
-
-  <script>
+<script>
+    // Just ensure the 'factors' array objects in your script use these exact keys:
+    // "Procedure_Familiarity", "Mental_Workload", "Willingness_to_Comply", etc.
+    // (I recommend updating your delphiData array to match the names in the Google Script above)
+</script>
     const sidebar = document.getElementById('sidebar');
     document.getElementById('menu-btn').addEventListener('click', () => sidebar.classList.toggle('-ml-64'));
 
