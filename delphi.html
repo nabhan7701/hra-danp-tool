@@ -52,13 +52,16 @@
 
         <h1 class="text-3xl font-bold text-blue-900 mb-2">DELPHI Expert Consensus Portal</h1>
         <p class="text-slate-600 mb-8 leading-relaxed">
-          Based on our initial construct validation (75% consensus threshold), 24 human error variables have been identified. 
-          Please rate the severity of these specific factors in high-hazard installations.<br>
-          <span class="text-blue-700 font-medium italic">Hover over any dashed factor name to view its exact definition.</span><br>
-          <strong>Scale: 1 (Very Low Influence) to 5 (Very High Influence).</strong>
+          Please provide your details below, followed by your ratings for our 24 identified human error factors.
         </p>
 
         <form class="space-y-10">
+          
+          <div class="p-6 bg-blue-50 rounded-lg border border-blue-100 shadow-inner">
+            <label class="block font-bold text-blue-900 mb-2 uppercase text-xs tracking-wider">Expert Information</label>
+            <input type="text" placeholder="Enter your Full Name or Expert ID" class="w-full p-3 border border-blue-200 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          </div>
+
           <div id="survey-container" class="space-y-10">
             </div>
 
@@ -74,108 +77,38 @@
   </div>
 
   <script>
-    // Sidebar logic
     const sidebar = document.getElementById('sidebar');
     document.getElementById('menu-btn').addEventListener('click', () => sidebar.classList.toggle('-ml-64'));
 
-    // The 24 Winning Factors organized by Cluster WITH Descriptions
     const delphiData = [
-      {
-        cluster: "Liveware-Software (L-S)",
-        desc: "Human interaction with abstract governing rules, instructions, and digital logic.",
-        factors: [
-          { name: "Procedure Familiarity", desc: "How well you know a specific written procedure." },
-          { name: "Mental Workload", desc: "How much thinking the written rules require." },
-          { name: "Willingness to Comply", desc: "Your personal choice to follow written company policies." },
-          { name: "Training Quality", desc: "Whether the training actually taught the system rules well." },
-          { name: "Law Compliance", desc: "Following official written government safety laws." },
-          { name: "Procedure Clarity", desc: "How easy it is to read and understand instructions." }
-        ]
-      },
-      {
-        cluster: "Liveware-Hardware (L-H)",
-        desc: "Human interaction directly with tangible equipment, machinery, and tools.",
-        factors: [
-          { name: "Physical Slip-Ups", desc: "Accidentally pressing or touching the wrong machine part." },
-          { name: "Sensor Tricking", desc: "Using your body to bypass physical security sensors." },
-          { name: "Over-Trusting Machines", desc: "Trusting automatic controls too much during physical work." },
-          { name: "Machine Controls", desc: "How easily you can physically press and read buttons." },
-          { name: "Alarm Visibility", desc: "How easily you can see or hear a physical alarm." },
-          { name: "Tool Availability", desc: "Actually having the right physical tools in your hands." }
-        ]
-      },
-      {
-        cluster: "Liveware-Environment (L-E)",
-        desc: "Impact of ambient workspace conditions or strict operational schedules.",
-        factors: [
-          { name: "Physical Exhaustion", desc: "Being completely tired out by the harsh environment." },
-          { name: "Alertness Drop", desc: "Losing focus because the environment makes you tired." },
-          { name: "Chronic Burnout", desc: "Long-term exhaustion from enduring harsh environmental shift demands." },
-          { name: "Extreme Heat", desc: "High temperatures that quickly drain your physical energy." },
-          { name: "Loud Noises", desc: "Loud workplace sounds that make it hard to focus." },
-          { name: "Shift Schedule", desc: "How your work hours and break times are planned." }
-        ]
-      },
-      {
-        cluster: "Liveware-Liveware (L-L)",
-        desc: "Social influence, teamwork, and organizational pressure.",
-        factors: [
-          { name: "Safety Over Production", desc: "Choosing safety first because the company demands it." },
-          { name: "Team Safety Help", desc: "Volunteering to fix safety issues alongside your coworkers." },
-          { name: "Shared Alertness", desc: "The whole team staying watchful because of company culture." },
-          { name: "Company Safety Culture", desc: "How much the whole organization truly prioritizes safety." },
-          { name: "Shift Handover Talk", desc: "Clearly explaining plant status to the next worker shift." },
-          { name: "Expert Team Help", desc: "Getting help from specialized engineers or maintenance coworkers." }
-        ]
-      }
+      { cluster: "Liveware-Software (L-S)", desc: "Human interaction with abstract governing rules, instructions, and digital logic.", factors: [ { name: "Procedure Familiarity", desc: "How well you know a specific written procedure." }, { name: "Mental Workload", desc: "How much thinking the written rules require." }, { name: "Willingness to Comply", desc: "Your personal choice to follow written company policies." }, { name: "Training Quality", desc: "Whether the training actually taught the system rules well." }, { name: "Law Compliance", desc: "Following official written government safety laws." }, { name: "Procedure Clarity", desc: "How easy it is to read and understand instructions." } ] },
+      { cluster: "Liveware-Hardware (L-H)", desc: "Human interaction directly with tangible equipment, machinery, and tools.", factors: [ { name: "Physical Slip-Ups", desc: "Accidentally pressing or touching the wrong machine part." }, { name: "Sensor Tricking", desc: "Using your body to bypass physical security sensors." }, { name: "Over-Trusting Machines", desc: "Trusting automatic controls too much during physical work." }, { name: "Machine Controls", desc: "How easily you can physically press and read buttons." }, { name: "Alarm Visibility", desc: "How easily you can see or hear a physical alarm." }, { name: "Tool Availability", desc: "Actually having the right physical tools in your hands." } ] },
+      { cluster: "Liveware-Environment (L-E)", desc: "Impact of ambient workspace conditions or strict operational schedules.", factors: [ { name: "Physical Exhaustion", desc: "Being completely tired out by the harsh environment." }, { name: "Alertness Drop", desc: "Losing focus because the environment makes you tired." }, { name: "Chronic Burnout", desc: "Long-term exhaustion from enduring harsh environmental shift demands." }, { name: "Extreme Heat", desc: "High temperatures that quickly drain your physical energy." }, { name: "Loud Noises", desc: "Loud workplace sounds that make it hard to focus." }, { name: "Shift Schedule", desc: "How your work hours and break times are planned." } ] },
+      { cluster: "Liveware-Liveware (L-L)", desc: "Social influence, teamwork, and organizational pressure.", factors: [ { name: "Safety Over Production", desc: "Choosing safety first because the company demands it." }, { name: "Team Safety Help", desc: "Volunteering to fix safety issues alongside your coworkers." }, { name: "Shared Alertness", desc: "The whole team staying watchful because of company culture." }, { name: "Company Safety Culture", desc: "How much the whole organization truly prioritizes safety." }, { name: "Shift Handover Talk", desc: "Clearly explaining plant status to the next worker shift." }, { name: "Expert Team Help", desc: "Getting help from specialized engineers or maintenance coworkers." } ] }
     ];
 
-    // JavaScript Engine to build the HTML survey dynamically
     const container = document.getElementById('survey-container');
     let htmlContent = '';
-
     delphiData.forEach((section, sectionIndex) => {
-      // Create a visually distinct header for each cluster
-      htmlContent += `
-        <div class="pt-4">
-          <h2 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-2">${section.cluster}</h2>
-          <p class="text-sm text-slate-500 italic mb-4">${section.desc}</p>
-          <div class="space-y-4">
-      `;
-
-      // Loop through the 6 factors and build the radio buttons WITH Tooltips
+      htmlContent += `<div class="pt-4"><h2 class="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-2 mb-2">${section.cluster}</h2><p class="text-sm text-slate-500 italic mb-4">${section.desc}</p><div class="space-y-4">`;
       section.factors.forEach((factor, factorIndex) => {
         const inputName = `q_${sectionIndex}_${factorIndex}`; 
-        
         htmlContent += `
             <div class="p-4 bg-white rounded-lg border border-slate-200 shadow-sm hover:border-blue-300 transition">
-              
               <div class="has-tooltip relative inline-block mb-4 cursor-help">
-                <span class="block font-semibold text-slate-700 border-b border-dashed border-slate-400 hover:text-blue-700 transition pb-0.5">
-                  ${factorIndex + 1}. ${factor.name}
-                </span>
+                <span class="block font-semibold text-slate-700 border-b border-dashed border-slate-400 hover:text-blue-700 transition pb-0.5">${factorIndex + 1}. ${factor.name}</span>
                 <div class="tooltip absolute z-50 bottom-full left-0 mb-2 w-72 p-4 bg-slate-900 text-white rounded-lg shadow-xl text-sm text-left normal-case tracking-normal leading-relaxed font-normal">
                   <div class="font-bold border-b border-slate-700 pb-1 mb-2 text-blue-300">${factor.name}</div>
                   <div class="text-slate-300 italic">${factor.desc}</div>
                 </div>
               </div>
-
               <div class="flex space-x-4 sm:space-x-8">
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="1" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">1</span></label>
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="2" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">2</span></label>
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="3" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">3</span></label>
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="4" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">4</span></label>
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="5" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">5</span></label>
+                ${[1,2,3,4,5].map(val => `<label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="${val}" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">${val}</span></label>`).join('')}
               </div>
-            </div>
-        `;
+            </div>`;
       });
-
-      // Close the cluster container
       htmlContent += `</div></div>`;
     });
-
-    // Inject the fully built HTML into the page
     container.innerHTML = htmlContent;
   </script>
 </body>
