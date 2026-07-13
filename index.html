@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Process Safety Research Hub</title>
+  <title>Process Safety Research Hub - Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .tooltip { visibility: hidden; opacity: 0; transition: opacity 0.2s; }
+    .has-tooltip:hover .tooltip { visibility: visible; opacity: 1; }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans flex h-screen overflow-hidden">
 
@@ -12,27 +17,13 @@
     <div class="h-16 flex items-center justify-center border-b border-slate-700 bg-slate-950">
       <h2 class="text-white font-bold text-xl tracking-wide">Menu</h2>
     </div>
-    
     <nav class="flex-1 overflow-y-auto mt-4">
       <ul class="space-y-1">
-        <li>
-          <a href="/" class="block px-6 py-4 bg-slate-800 text-white border-l-4 border-blue-500 font-medium">Home Dashboard</a>
-        </li>
-        <li>
-          <a href="/delphi" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">1. DELPHI Portal</a>
-        </li>
-        <li>
-          <a href="/ahp" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">2. AHP Matrix</a>
-        </li>
-        <li>
-          <a href="/dematel" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">3. DEMATEL Matrix</a>
-        </li>
-        <li>
-          <a href="/dashboard" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">4. Final Results</a>
-        </li>
-        <li class="mt-8 border-t border-slate-700 pt-4">
-          <a href="#" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition text-sm">About the Researcher</a>
-        </li>
+        <li><a href="/" class="block px-6 py-4 bg-slate-800 text-white border-l-4 border-blue-500 font-medium">Home Dashboard</a></li>
+        <li><a href="/delphi" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">1. DELPHI Portal</a></li>
+        <li><a href="/ahp" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">2. AHP Matrix</a></li>
+        <li><a href="/dematel" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">3. DEMATEL Matrix</a></li>
+        <li><a href="/dashboard" class="block px-6 py-4 hover:bg-slate-800 hover:text-white transition">4. Final Results</a></li>
       </ul>
     </nav>
   </aside>
@@ -40,11 +31,9 @@
   <div class="flex-1 flex flex-col h-screen">
     
     <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10 border-b border-slate-200">
-      
       <button id="menu-btn" class="text-slate-500 hover:text-slate-800 p-2 rounded focus:outline-none focus:ring-2 focus:ring-slate-300">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
-      
       <div class="flex items-center space-x-4">
         <div class="w-9 h-9 bg-slate-100 rounded-full flex items-center justify-center border border-slate-300 shadow-sm">
           <span class="text-sm font-bold text-slate-600">NR</span>
@@ -53,28 +42,78 @@
     </header>
 
     <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
-      <div class="max-w-5xl mx-auto bg-white p-10 rounded-xl shadow-md border border-slate-200">
-        <h1 class="text-4xl font-bold text-slate-800 mb-6">Process Safety Research Hub</h1>
-        <p class="text-slate-600 text-lg leading-relaxed">
-          Welcome to the main dashboard. This portal digitalizes the DEMATEL-based Analytic Network Process (DANP) framework to systematically analyze human error in high-hazard installations.
-        </p>
-        <p class="text-slate-600 mt-6 font-medium bg-blue-50 p-4 rounded-lg border border-blue-100 inline-block">
-          Select a tool from the menu on the left to begin data collection.
-        </p>
+      <div class="max-w-7xl mx-auto space-y-8">
+        
+        <h1 class="text-3xl font-bold text-blue-900">HRA Construct Validation Dashboard</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4">
+            <div class="p-3 bg-blue-100 text-blue-700 rounded-lg text-2xl font-bold">236</div>
+            <div><p class="text-sm text-slate-500 font-semibold uppercase">Total Respondents</p><p class="font-bold text-slate-800">Expert Panel</p></div>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4">
+            <div class="p-3 bg-amber-100 text-amber-700 rounded-lg text-2xl font-bold">60%</div>
+            <div><p class="text-sm text-slate-500 font-semibold uppercase">Top Industry</p><p class="font-bold text-slate-800">Petrochemical</p></div>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4">
+            <div class="p-3 bg-emerald-100 text-emerald-700 rounded-lg text-2xl font-bold">90%</div>
+            <div><p class="text-sm text-slate-500 font-semibold uppercase">Primary Experience</p><p class="font-bold text-slate-800">0-5 Years Bracket</p></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h2 class="text-lg font-bold text-slate-800 mb-4">Demographic Distribution</h2>
+            <div class="grid grid-cols-3 gap-4 h-48">
+              <div class="relative h-full w-full"><canvas id="chartExp"></canvas></div>
+              <div class="relative h-full w-full"><canvas id="chartPos"></canvas></div>
+              <div class="relative h-full w-full"><canvas id="chartInd"></canvas></div>
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h2 class="text-lg font-bold text-slate-800 mb-4">Cluster Consensus</h2>
+            <div class="relative h-48 w-full"><canvas id="chartRadar"></canvas></div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+          <h2 class="text-xl font-bold text-slate-800 mb-4">Factor Distribution Matrix (Hover for Details)</h2>
+          <div class="grid grid-cols-3 bg-slate-100 rounded-t-lg font-bold text-slate-700 border-b border-slate-200">
+            <div class="p-4 border-r border-slate-200">Cluster Name</div>
+            <div class="p-4 border-r border-slate-200 text-amber-700">Internal Factors (Cognitive/Physical)</div>
+            <div class="p-4 text-emerald-700">External Factors (Systemic/Environment)</div>
+          </div>
+          <div id="matrix-container" class="border border-t-0 border-slate-200 rounded-b-lg text-sm"></div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-slate-800 pt-4 border-t border-slate-200">Construct Validation: >75% Consensus Threshold</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12">
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="font-bold text-slate-700 mb-2">Liveware-Software (L-S) Winners</h3><div class="relative h-64 w-full"><canvas id="barLS"></canvas></div></div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="font-bold text-slate-700 mb-2">Liveware-Hardware (L-H) Winners</h3><div class="relative h-64 w-full"><canvas id="barLH"></canvas></div></div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="font-bold text-slate-700 mb-2">Liveware-Environment (L-E) Winners</h3><div class="relative h-64 w-full"><canvas id="barLE"></canvas></div></div>
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="font-bold text-slate-700 mb-2">Liveware-Liveware (L-L) Winners</h3><div class="relative h-64 w-full"><canvas id="barLL"></canvas></div></div>
+        </div>
       </div>
     </main>
   </div>
 
   <script>
-    // 1. Grab the elements from the page
     const sidebar = document.getElementById('sidebar');
-    const menuBtn = document.getElementById('menu-btn');
-
-    // 2. Listen for a click on the button
-    menuBtn.addEventListener('click', () => {
-      // 3. Toggle a negative margin (-ml-64) to slide the sidebar out of view
-      sidebar.classList.toggle('-ml-64');
-    });
+    document.getElementById('menu-btn').addEventListener('click', () => sidebar.classList.toggle('-ml-64'));
+    Chart.defaults.font.family = 'Inter, sans-serif'; Chart.defaults.color = '#64748b';
+    const createDoughnut = (id, labels, data, colors, title) => { new Chart(document.getElementById(id), { type: 'doughnut', data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: {size: 10} } }, title: { display: true, text: title, font: {size: 14} } }, cutout: '70%' } }); };
+    createDoughnut('chartExp', ['0-5 Yrs', '6-10 Yrs', '11-15 Yrs'], [90, 7, 3], ['#3b82f6', '#93c5fd', '#dbeafe'], 'Experience');
+    createDoughnut('chartPos', ['Managerial', 'Non-Managerial'], [76, 24], ['#f59e0b', '#fef3c7'], 'Position');
+    createDoughnut('chartInd', ['Petrochem', 'Chem', 'Construction', 'Other'], [60, 15, 10, 15], ['#10b981', '#6ee7b7', '#d1fae5', '#a7f3d0'], 'Industry');
+    new Chart(document.getElementById('chartRadar'), { type: 'radar', data: { labels: ['L-S', 'L-H', 'L-E', 'L-L'], datasets: [{ label: 'Aggregate Consensus %', data: [82, 78, 85, 88], backgroundColor: 'rgba(59, 130, 246, 0.2)', borderColor: '#3b82f6', pointBackgroundColor: '#1d4ed8' }] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 50, max: 100, ticks: { stepSize: 10 } } }, plugins: { legend: { display: false } } } });
+    const createBar = (id, labels, data, color) => { new Chart(document.getElementById(id), { type: 'bar', data: { labels, datasets: [{ label: '% Agreement', data, backgroundColor: color, borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { min: 70, max: 100 } }, plugins: { legend: { display: false } } } }); };
+    createBar('barLS', ['Procedure Familiarity', 'Mental Workload', 'Willingness to Comply', 'Training Quality', 'Law Compliance', 'Procedure Clarity'], [88, 82, 91, 78, 95, 84], '#3b82f6');
+    createBar('barLH', ['Physical Slip-Ups', 'Sensor Tricking', 'Over-Trusting Machines', 'Machine Controls', 'Alarm Visibility', 'Tool Availability'], [81, 76, 89, 77, 85, 90], '#f59e0b');
+    createBar('barLE', ['Physical Exhaustion', 'Alertness Drop', 'Chronic Burnout', 'Extreme Heat', 'Loud Noises', 'Shift Schedule'], [92, 88, 79, 94, 83, 77], '#10b981');
+    createBar('barLL', ['Safety Over Production', 'Team Safety Help', 'Shared Alertness', 'Company Safety Culture', 'Shift Handover Talk', 'Expert Team Help'], [85, 79, 88, 92, 96, 81], '#6366f1');
+    const matrixData = [ { cluster: "Liveware-Software (L-S)", internal: [ { name: "System Experience", acc: 68 }, { name: "Rule Comprehension", acc: 71 }, { name: "Classroom Training", acc: 65 }, { name: "Procedure Familiarity", acc: 88, win: true }, { name: "Mental Workload", acc: 82, win: true }, { name: "Rule Complexity", acc: 74 }, { name: "Information Overload", acc: 70 }, { name: "System Misunderstanding", acc: 62 }, { name: "Rule Recall", acc: 69 }, { name: "Decision Delay", acc: 72 }, { name: "Intentional Rule-Breaking", acc: 55 }, { name: "Willingness to Comply", acc: 91, win: true }, { name: "Mental Shortcuts", acc: 66 }, { name: "Thinking Blind-Spots", acc: 60 }, { name: "Risk Misjudgment", acc: 64 } ], external: [ { name: "Digital Security Flaws", acc: 50 }, { name: "Language Barrier", acc: 73 }, { name: "Training Quality", acc: 78, win: true }, { name: "Law Compliance", acc: 95, win: true }, { name: "Conflicting Laws", acc: 61 }, { name: "Procedure Clarity", acc: 84, win: true }, { name: "Permit Enforcement", acc: 74 }, { name: "Late Paperwork", acc: 68 } ] }, { cluster: "Liveware-Hardware (L-H)", internal: [ { name: "Muscle Memory Loss", acc: 65 }, { name: "Sensor Tricking", acc: 76, win: true }, { name: "Over-Trusting Machines", acc: 89, win: true }, { name: "Physical Slip-Ups", acc: 81, win: true }, { name: "Physical Strength", acc: 62 }, { name: "Physical Endurance", acc: 69 } ], external: [ { name: "Equipment Reliability", acc: 74 }, { name: "Machine Controls", acc: 77, win: true }, { name: "Equipment Mismatch", acc: 68 }, { name: "Alarm Visibility", acc: 85, win: true }, { name: "Tool Availability", acc: 90, win: true } ] }, { cluster: "Liveware-Environment (L-E)", internal: [ { name: "Physical Exhaustion", acc: 92, win: true }, { name: "Shift Drowsiness", acc: 74 }, { name: "Stress Exhaustion", acc: 72 }, { name: "End-of-Shift Fatigue", acc: 70 }, { name: "Alertness Drop", acc: 88, win: true }, { name: "Environmental Distraction", acc: 71 }, { name: "Shift Readiness", acc: 65 }, { name: "Time Pressure Stress", acc: 73 }, { name: "Chronic Burnout", acc: 79, win: true } ], external: [ { name: "Workspace Discomfort", acc: 70 }, { name: "Extreme Heat", acc: 94, win: true }, { name: "High Humidity", acc: 68 }, { name: "Poor Lighting", acc: 55 }, { name: "Loud Noises", acc: 83, win: true }, { name: "Signal Dead-Zones", acc: 60 }, { name: "Shift Schedule", acc: 77, win: true }, { name: "Countdown Time", acc: 64 }, { name: "Rushed Work", acc: 72 }, { name: "Repetitive Tasks", acc: 69 } ] }, { cluster: "Liveware-Liveware (L-L)", internal: [ { name: "Safety Motivation", acc: 74 }, { name: "Safety Over Production", acc: 85, win: true }, { name: "Team Safety Help", acc: 79, win: true }, { name: "Workplace Mood", acc: 60 }, { name: "Safety Confidence", acc: 71 }, { name: "Shared Alertness", acc: 88, win: true }, { name: "Fear of Bosses", acc: 68 }, { name: "Unofficial Team Habits", acc: 70 }, { name: "Ignoring Small Rules", acc: 65 }, { name: "Worker Resentment", acc: 55 } ], external: [ { name: "Company Safety Culture", acc: 92, win: true }, { name: "Management Support", acc: 74 }, { name: "Strict Management", acc: 66 }, { name: "Production vs. Safety", acc: 70 }, { name: "Open Safety Sharing", acc: 72 }, { name: "Clear Team Talk", acc: 68 }, { name: "Team Cooperation", acc: 73 }, { name: "Official Talking Rules", acc: 61 }, { name: "Shift Handover Talk", acc: 96, win: true }, { name: "Top Boss Support", acc: 74 }, { name: "Direct Boss Help", acc: 69 }, { name: "Boss Breaking Rules", acc: 58 }, { name: "Poor Contractor Checks", acc: 65 }, { name: "Poor Lifting Oversight", acc: 62 }, { name: "Sufficient Team Resources", acc: 71 }, { name: "Enough Workers", acc: 70 }, { name: "Expert Team Help", acc: 81, win: true } ] } ];
+    const buildTags = (items) => items.map(item => { const agree = Math.round(236 * (item.acc / 100)); const unsure = Math.round(236 * ((100 - item.acc) / 2 / 100)); const disagree = 236 - agree - unsure; const baseClass = item.win ? "bg-blue-100 text-blue-800 border-blue-300 font-semibold" : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"; return `<div class="has-tooltip relative inline-block m-1 px-3 py-1 rounded-full border ${baseClass} cursor-help text-xs">${item.name}<div class="tooltip absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 p-3 bg-slate-900 text-white rounded-lg shadow-xl text-xs text-left"><div class="font-bold border-b border-slate-700 pb-1 mb-1">${item.name}</div><div class="flex justify-between text-emerald-400"><span>Agree:</span> <span>${agree} (${item.acc}%)</span></div><div class="flex justify-between text-amber-400"><span>Unsure:</span> <span>${unsure}</span></div><div class="flex justify-between text-rose-400"><span>Disagree:</span> <span>${disagree}</span></div></div></div>`; }).join('');
+    document.getElementById('matrix-container').innerHTML = matrixData.map((row, index) => `<div class="grid grid-cols-3 border-b border-slate-200 last:border-0 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50'}"><div class="p-4 border-r border-slate-200 font-bold text-slate-800 flex items-center">${row.cluster}</div><div class="p-4 border-r border-slate-200">${buildTags(row.internal)}</div><div class="p-4">${buildTags(row.external)}</div></div>`).join('');
   </script>
 </body>
 </html>
