@@ -113,17 +113,17 @@
       // Loop through the 6 factors in this cluster and build the radio buttons
       section.factors.forEach((factor, factorIndex) => {
         // Create a unique ID for the HTML radio group (e.g., q_0_1, q_0_2)
-        const inputName = \`q_\${sectionIndex}_\${factorIndex}\`; 
+        const inputName = `q_${sectionIndex}_${factorIndex}`; 
         
         htmlContent += `
             <div class="p-4 bg-white rounded-lg border border-slate-200 shadow-sm hover:border-blue-300 transition">
               <label class="block font-semibold text-slate-700 mb-3">${factorIndex + 1}. ${factor}</label>
               <div class="flex space-x-4 sm:space-x-8">
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="\${inputName}" value="1" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">1</span></label>
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="\${inputName}" value="2" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">2</span></label>
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="\${inputName}" value="3" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">3</span></label>
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="\${inputName}" value="4" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">4</span></label>
-                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="\${inputName}" value="5" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">5</span></label>
+                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="1" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">1</span></label>
+                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="2" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">2</span></label>
+                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="3" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">3</span></label>
+                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="4" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">4</span></label>
+                <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="${inputName}" value="5" class="w-5 h-5 text-blue-600 focus:ring-blue-500"><span class="group-hover:text-blue-600 font-medium">5</span></label>
               </div>
             </div>
         `;
